@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Empleado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #1a1d3d;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 200px;
+            background: #0f1129;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .user-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .user-info p {
+            font-size: 12px;
+            color: #8b92b8;
+        }
+
+        .menu-toggle {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            list-style: none;
+            flex: 1;
+        }
+
+        .nav-item {
+            margin-bottom: 8px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: #8b92b8;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 18px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 200px;
+            padding: 30px;
+            background: #2a3154;
+        }
+
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 30px;
+        }
+
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            color: #1a1d3d;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .card-icon {
+            font-size: 20px;
+            color: #3b82f6;
+        }
+
+        .card-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1a1d3d;
+        }
+
+        .card-currency {
+            font-size: 16px;
+            color: #6b7280;
+            margin-left: 4px;
+        }
+
+        .card-gradient {
+            background: linear-gradient(135deg, #a8d5e2 0%, #7ec8e3 100%);
+        }
+
+        /* Chart Card */
+        .chart-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 250px;
+            position: relative;
+        }
+
+        /* Alerts Card */
+        .alerts-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .alerts-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #1a1d3d;
+        }
+
+        .alert-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        /* Right Column */
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .hours-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hours-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .hours-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1a1d3d;
+        }
+
+        .hours-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #1a1d3d;
+        }
+
+        /* Donut Chart */
+        .donut-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .donut-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .legend {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .legend-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .legend-percentage {
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        /* Layout */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+            }
+
+            .main-content {
+                margin-left: 60px;
+            }
+
+            .user-info, .nav-text {
+                display: none;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="user-profile">
+                <div class="user-avatar">F</div>
+                <div class="user-info">
+                    <h3>Fernanda</h3>
+                    <p>Empleado(a)</p>
+                </div>
+                <button class="menu-toggle">☰</button>
+            </div>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">🕐</span>
+                            <span class="nav-text">Asistencias</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="nav-item" style="margin-top: auto;">
+                <a href="#" class="nav-link">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Extras</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <div class="user-icon">👤</div>
+            </div>
+
+            <div class="dashboard-layout">
+                <div class="left-column">
+                    <!-- Top Cards -->
+                    <div class="cards-grid">
+                        <div class="card card-gradient">
+                            <div class="card-header">
+                                <span class="card-icon">💲</span>
+                                <span>Próxima Nómina</span>
+                            </div>
+                            <div class="card-value">
+                                $714,495<span class="card-currency">COP</span>
+                            </div>
+                        </div>
+
+                        <div class="card card-gradient">
+                            <div class="card-header">
+                                <span class="card-icon">💲</span>
+                                <span>Salario Base</span>
+                            </div>
+                            <div class="card-value">
+                                $1,428,990<span class="card-currency">COP</span>
+                            </div>
+                        </div>
+
+                        <div class="card card-gradient">
+                            <div class="card-header">
+                                <span class="card-icon">💲</span>
+                                <span>Deuda con la empresa</span>
+                            </div>
+                            <div class="card-value">
+                                $0<span class="card-currency">COP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart -->
+                    <div class="chart-card">
+                        <div class="chart-container">
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Alerts -->
+                    <div class="alerts-card">
+                        <h2 class="alerts-title">Alertas</h2>
+                        <div class="alert-message">
+                            Actualmente no presentas ninguna novedad o alerta, mantente así!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <!-- Hours Card -->
+                    <div class="hours-card">
+                        <div class="hours-icon">🕐</div>
+                        <div class="hours-title">Horas Trabajadas</div>
+                        <div class="hours-value">744</div>
+                    </div>
+
+                    <!-- Donut Chart -->
+                    <div class="donut-card">
+                        <div class="donut-container">
+                            <canvas id="donutChart" width="200" height="200"></canvas>
+                        </div>
+                        <div class="legend">
+                            <div class="legend-item">
+                                <div class="legend-label">
+                                    <div class="legend-color" style="background: #3b82f6;"></div>
+                                    <span>Asistencia</span>
+                                </div>
+                                <span class="legend-percentage">50%</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-label">
+                                    <div class="legend-color" style="background: #0f1129;"></div>
+                                    <span>Horas Extra</span>
+                                </div>
+                                <span class="legend-percentage">35%</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-label">
+                                    <div class="legend-color" style="background: #06b6d4;"></div>
+                                    <span>Ausencia</span>
+                                </div>
+                                <span class="legend-percentage">15%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Line Chart
+        const lineCanvas = document.getElementById('lineChart');
+        const lineCtx = lineCanvas.getContext('2d');
+        
+        // Set canvas size
+        lineCanvas.width = lineCanvas.offsetWidth;
+        lineCanvas.height = lineCanvas.offsetHeight;
+
+        const lineData = [26.5, 26.8, 27.2, 26.9, 28.5, 27.1, 26.8, 27.5, 27.8, 26.5, 27.2, 26.9];
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+        
+        function drawLineChart() {
+            const padding = 40;
+            const width = lineCanvas.width - padding * 2;
+            const height = lineCanvas.height - padding * 2;
+            
+            // Clear canvas
+            lineCtx.clearRect(0, 0, lineCanvas.width, lineCanvas.height);
+            
+            // Draw axes
+            lineCtx.strokeStyle = '#e5e7eb';
+            lineCtx.lineWidth = 1;
+            
+            // Y-axis labels
+            lineCtx.fillStyle = '#6b7280';
+            lineCtx.font = '12px sans-serif';
+            lineCtx.textAlign = 'right';
+            
+            for (let i = 0; i <= 4; i++) {
+                const y = padding + (height / 4) * i;
+                const value = 29 - i;
+                lineCtx.fillText(value, padding - 10, y + 4);
+            }
+            
+            // X-axis labels
+            lineCtx.textAlign = 'center';
+            months.forEach((month, i) => {
+                const x = padding + (width / (months.length - 1)) * i;
+                lineCtx.fillText(month, x, lineCanvas.height - 10);
+            });
+            
+            // Draw line
+            lineCtx.strokeStyle = '#1e40af';
+            lineCtx.lineWidth = 2;
+            lineCtx.beginPath();
+            
+            lineData.forEach((value, i) => {
+                const x = padding + (width / (lineData.length - 1)) * i;
+                const y = padding + height - ((value - 25) / 4) * height;
+                
+                if (i === 0) {
+                    lineCtx.moveTo(x, y);
+                } else {
+                    lineCtx.lineTo(x, y);
+                }
+            });
+            
+            lineCtx.stroke();
+        }
+        
+        drawLineChart();
+
+        // Donut Chart
+        const donutCanvas = document.getElementById('donutChart');
+        const donutCtx = donutCanvas.getContext('2d');
+        
+        const donutData = [
+            { value: 50, color: '#3b82f6' },
+            { value: 35, color: '#0f1129' },
+            { value: 15, color: '#06b6d4' }
+        ];
+        
+        function drawDonutChart() {
+            const centerX = donutCanvas.width / 2;
+            const centerY = donutCanvas.height / 2;
+            const radius = 80;
+            const innerRadius = 50;
+            
+            let currentAngle = -Math.PI / 2;
+            
+            donutData.forEach(segment => {
+                const sliceAngle = (segment.value / 100) * 2 * Math.PI;
+                
+                // Draw outer arc
+                donutCtx.beginPath();
+                donutCtx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+                donutCtx.arc(centerX, centerY, innerRadius, currentAngle + sliceAngle, currentAngle, true);
+                donutCtx.closePath();
+                donutCtx.fillStyle = segment.color;
+                donutCtx.fill();
+                
+                currentAngle += sliceAngle;
+            });
+        }
+        
+        drawDonutChart();
+
+        // Responsive resize
+        window.addEventListener('resize', () => {
+            lineCanvas.width = lineCanvas.offsetWidth;
+            lineCanvas.height = lineCanvas.offsetHeight;
+            drawLineChart();
+        });
+    </script>
+</body>
+</html>

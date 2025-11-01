@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Nómina</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #5b6b8f;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 180px;
+            background: #1a1d2e;
+            color: #8b92b0;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #2a2d3e;
+            margin-bottom: 20px;
+        }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .profile-info h3 {
+            color: white;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .profile-info p {
+            font-size: 11px;
+            color: #8b92b0;
+        }
+
+        .menu-toggle {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-item:hover {
+            background: #2a2d3e;
+            color: white;
+        }
+
+        .nav-item.active {
+            background: #3a3d4e;
+            color: white;
+            border-left: 3px solid #4a9eff;
+        }
+
+        .nav-item svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .content-wrapper {
+            background: #6b7a9f;
+            border-radius: 20px;
+            padding: 30px;
+            min-height: calc(100vh - 40px);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 10px 40px 10px 20px;
+            border-radius: 25px;
+            border: none;
+            width: 250px;
+            font-size: 14px;
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+        }
+
+        /* Table */
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #1a1d2e;
+            color: white;
+        }
+
+        th {
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #e5e7eb;
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        td {
+            padding: 15px;
+            font-size: 14px;
+        }
+
+        .employee-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .avatar-purple { background: #c4b5fd; color: #6b21a8; }
+        .avatar-gray { background: #4b5563; }
+        .avatar-yellow { background: #fbbf24; color: #92400e; }
+        .avatar-pink { background: #ec4899; }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #10b981;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-edit {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .btn-edit:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-nomina {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .btn-nomina:hover {
+            background: #a7f3d0;
+        }
+
+        .footer-config {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+        }
+
+        .btn-config {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+        }
+
+        .btn-config:hover {
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <div class="profile-img">E</div>
+                <div class="profile-info">
+                    <h3>Emil</h3>
+                    <p>Administrador</p>
+                </div>
+                <button class="menu-toggle">☰</button>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <span>🏠</span>
+                    <span>Dashboard</span>
+                </li>
+                <li class="nav-item">
+                    <span>📊</span>
+                    <span>Finanzas</span>
+                </li>
+                <li class="nav-item">
+                    <span>👥</span>
+                    <span>Empleados</span>
+                </li>
+                <li class="nav-item">
+                    <span>🕐</span>
+                    <span>Asistencias</span>
+                </li>
+                <li class="nav-item active">
+                    <span>💰</span>
+                    <span>Nómina</span>
+                </li>
+                <li class="nav-item">
+                    <span>📈</span>
+                    <span>Reportes</span>
+                </li>
+                <li class="nav-item">
+                    <span>⚙️</span>
+                    <span>Extras</span>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <div class="header">
+                    <h1>
+                        <span>☰</span>
+                        Nómina
+                    </h1>
+                    <div class="search-box">
+                        <input type="text" placeholder="1064868724" id="searchInput">
+                        <button>🔍</button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre y Apellido</th>
+                                <th>Cedula</th>
+                                <th>Horas trabajadas</th>
+                                <th>Salario B.</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTable">
+                            <!-- Data will be inserted by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="footer-config">
+                <button class="btn-config">
+                    <span>⚙️</span>
+                    Configurar texto nómina
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Employee data
+        const employees = [
+            { name: 'Emil Sanchez', cedula: '1.064.868.724', hours: 44, salary: '2,428,990', avatar: 'avatar-purple', initial: 'E' },
+            { name: 'Fernanda Rodriguez', cedula: '1.064.868.724', hours: 44, salary: '1,428,990', avatar: 'avatar-gray', initial: 'F' },
+            { name: 'Carlos Sanchez', cedula: '1.064.868.724', hours: 44, salary: '1,428,990', avatar: 'avatar-purple', initial: 'C' },
+            { name: 'Emil Sanchez', cedula: '1.064.868.724', hours: 44, salary: '2,428,990', avatar: 'avatar-gray', initial: 'E' },
+            { name: 'Fernanda Rodriguez', cedula: '1.064.868.724', hours: 44, salary: '1,428,990', avatar: 'avatar-purple', initial: 'F' },
+            { name: 'Carlos Sanchez', cedula: '1.064.868.724', hours: 44, salary: '1,428,990', avatar: 'avatar-yellow', initial: 'C' },
+            { name: 'Emil Sanchez', cedula: '1.064.868.724', hours: 44, salary: '2,428,990', avatar: 'avatar-purple', initial: 'E' },
+            { name: 'Fernanda Rodriguez', cedula: '1.064.868.724', hours: 40, salary: '1,428,990', avatar: 'avatar-pink', initial: 'F' },
+            { name: 'Carlos Sanchez', cedula: '1.064.868.724', hours: 44, salary: '1,428,990', avatar: 'avatar-purple', initial: 'C' }
+        ];
+
+        // Render table
+        function renderTable(data) {
+            const tbody = document.getElementById('employeeTable');
+            tbody.innerHTML = data.map(emp => `
+                <tr>
+                    <td>
+                        <div class="employee-cell">
+                            <div class="avatar ${emp.avatar}">${emp.initial}</div>
+                            <span>${emp.name}</span>
+                        </div>
+                    </td>
+                    <td>${emp.cedula}</td>
+                    <td>${emp.hours}</td>
+                    <td>$ ${emp.salary}</td>
+                    <td><div class="status-indicator"></div></td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn btn-edit">✏️ Editar</button>
+                            <button class="btn btn-nomina">⬇️ Nómina</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = employees.filter(emp => 
+                emp.name.toLowerCase().includes(searchTerm) || 
+                emp.cedula.includes(searchTerm)
+            );
+            renderTable(filtered);
+        });
+
+        // Initial render
+        renderTable(employees);
+
+        // Navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
