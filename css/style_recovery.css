@@ -1,0 +1,212 @@
+/* General */
+body {
+  background-color: #1B2133;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  background: transparent;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 2.5%;
+  padding-right: 15%;
+}
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.navbar-links a:hover {
+  color: #4db8b8;
+}
+
+/* Main Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 3rem 0;
+}
+
+/* Decoration */
+.decoration {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Círculos decorativos */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 40%;
+  transform: translate(-20%, -50%);
+}
+
+/* Círculo exterior */
+.circle-outer {
+  width: 35vw;
+  height: 35vw;
+  background: linear-gradient(135deg, #1D3242 0%, #2A838A 100%);
+  opacity: 0.9;
+}
+
+/* Círculo medio */
+.circle-middle {
+   width: 25vw;
+  height: 25vw;
+  background: #1B2133;
+  transform: translate( -7%, -50%);
+}
+
+/* Círculo interior */
+.circle-inner {
+    width: 22vw;
+  height: 22vw;
+  background-color: #223553;
+  transform: translate( -1%, -50%);
+}
+
+/* Línea decorativa */
+.Line {
+  position: relative;
+  top: 50%;
+  left: 0;
+}
+
+.line-last {
+  position: absolute;
+  width: 95%;
+  height: 15vw;
+  background: linear-gradient(135deg, #182c4e 0%, #43849a 100%);
+  transform: translate( -10%, -50%);
+  opacity: 0.4;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+}
+
+
+/* Login Section */
+.login-section {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 25%;
+  padding-top: 20%;
+  
+}
+.login-section h1 {
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.subtitle {
+  color: #b8c5d6;
+  margin-bottom: 1.5rem;
+  font-size:18px;
+}
+.input-group {
+  margin-bottom: 1rem;
+}
+.input-group input {
+  width: 100%;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #17a2b8;
+  border-radius: 999px;
+  padding: 1rem;
+  outline: none;
+}
+.input-group input::placeholder {
+  color: #7a8a9a;
+}
+.input-group input:focus {
+  border-color: #5dd8d8;
+  box-shadow: 0 0 0 0.25rem rgba(77, 184, 184, 0.25);
+}
+
+.Iniciar {
+  margin: 1rem 0;
+}
+.Iniciar a {
+  color: #fff;
+  text-decoration: none;
+}
+.Iniciar a:hover {
+  color: #4db8b8;
+}
+
+.button-container button {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  padding: 0.6rem 2.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.button-container button:hover {
+  background-color: #4db8b8;
+  border-color: #4db8b8;
+  box-shadow: 0 4px 10px rgba(77, 184, 184, 0.4);
+}
+
+
+/* Para pantallas grandes */
+@media (min-width: 1200px) {
+  .line-last {
+      transform: translate( -18%, -50%);
+  }
+}
+
+/* Para pantallas medianas (tablets) */
+@media (max-width: 1198px) {
+  .line-last {
+    width: 93%;
+    height: 20vw;
+    transform: translate( -30%, -50%);
+  }
+
+  .circle-outer {
+    width: 50vw;
+    height: 50vw;
+  }
+
+  .circle-middle {
+    width: 37vw;
+    height: 37vw;
+     transform: translate( -10%, -50%);
+  }
+
+  .circle-inner {
+    width: 33vw;
+    height: 33vw;
+    transform: translate( -5%, -50%);
+  }
+
+  .login-section {
+    padding-top: 10%;
+    padding-left: 25%;
+    padding-right: 20%;
+  }
+}
+
