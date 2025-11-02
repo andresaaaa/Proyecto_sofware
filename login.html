@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e2a3a 0%, #2d3e50 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 2rem 4rem;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #4db8b8;
+        }
+
+        /* Main Container */
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Decorative Circles */
+        .decoration {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            flex-shrink: 0;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .circle-outer {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #3a7a7a 0%, #4db8b8 100%);
+            opacity: 0.9;
+        }
+
+        .circle-middle {
+            width: 380px;
+            height: 380px;
+            background: #2d3e50;
+            border: 3px solid #1e2a3a;
+        }
+
+        .circle-inner {
+            width: 260px;
+            height: 260px;
+            background: linear-gradient(135deg, #2d4a5a 0%, #3a5a6a 100%);
+        }
+
+        /* Login Form */
+        .login-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #b8c5d6;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: 2px solid #4db8b8;
+            border-radius: 50px;
+            color: #ffffff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]::placeholder,
+        input[type="password"]::placeholder {
+            color: #7a8a9a;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #5dd8d8;
+            box-shadow: 0 0 0 3px rgba(77, 184, 184, 0.1);
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .forgot-password a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #4db8b8;
+        }
+
+        .submit-btn {
+            display: block;
+            margin: 3rem auto 0;
+            padding: 0.9rem 4rem;
+            background: transparent;
+            border: 2px solid #ffffff;
+            border-radius: 50px;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #4db8b8;
+            border-color: #4db8b8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(77, 184, 184, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                padding: 2rem;
+            }
+
+            .decoration {
+                width: 300px;
+                height: 300px;
+                margin-bottom: 2rem;
+            }
+
+            .circle-outer {
+                width: 300px;
+                height: 300px;
+            }
+
+            .circle-middle {
+                width: 230px;
+                height: 230px;
+            }
+
+            .circle-inner {
+                width: 160px;
+                height: 160px;
+            }
+
+            .login-section {
+                margin-left: 0;
+            }
+
+            nav {
+                padding: 1.5rem 2rem;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                padding: 1rem;
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .decoration {
+                width: 200px;
+                height: 200px;
+            }
+
+            .circle-outer {
+                width: 200px;
+                height: 200px;
+            }
+
+            .circle-middle {
+                width: 150px;
+                height: 150px;
+            }
+
+            .circle-inner {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#about">Acerca de Nosotros</a>
+        <a href="#services">Servicios</a>
+    </nav>
+
+    <div class="container">
+        <div class="decoration">
+            <div class="circle circle-outer"></div>
+            <div class="circle circle-middle"></div>
+            <div class="circle circle-inner"></div>
+        </div>
+
+        <div class="login-section">
+            <form class="login-form" onsubmit="handleSubmit(event)">
+                <h1>Iniciar Sesión</h1>
+                <p class="subtitle">Ingresa tus datos</p>
+
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Usuario" required>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Contraseña" required>
+                </div>
+
+                <div class="forgot-password">
+                    <a href="#forgot">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <button type="submit" class="submit-btn">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            console.log('Login attempt:', { username, password });
+            alert('Formulario enviado! Usuario: ' + username);
+            
+            // Aquí puedes agregar tu lógica de autenticación
+        }
+    </script>
+</body>
+</html>
