@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Registro de Gastos/Ingresos</title>
+    <link rel="stylesheet" href="../css/style_finanzas.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="avatar">E</div>
+            <div class="user-info">
+                <h3>Emil</h3>
+                <p>Administrador</p>
+            </div>
+            
+        </div>
+        
+        <nav>
+            <div class="menu-item" id="Dashboard">
+                <span>🏠</span>
+                <span>Dashboard</span>
+            </div>
+
+            <div class="menu-item active" id="Finanzas" >  
+                    <span>📈</span>
+                    <span>Finanzas</span>
+            </div>
+            <div class="menu-item" id="Empleados">
+                <span>👥</span>
+                <span>Empleados</span>
+            </div>
+            <div class="menu-item" id="Asistencia">
+                <span>🕐</span>
+                <span>Asistencias</span>
+            </div>
+            <div class="menu-item" id="Nomina">
+                <span>💰</span>
+                <span>Nómina</span>
+            </div>
+            <div class="menu-item" id="Reportes">
+                <span>📊</span>
+                <span>Reportes</span>
+            </div>
+        </nav>
+
+        <div style="position: absolute; bottom: 20px; width: 100%;" id="Extras">
+            <div class="menu-item">
+                <span>⚙️</span>
+                <span>Extras</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <!-- Header -->
+            <header class="page-header">
+                <h1 class="page-title">
+                     Registro de Gastos/ingresos
+                </h1>
+                <div class="header-actions">
+                    <button class="btn btn-secondary">
+                        <span>Categorías</span>
+                        <span class="badge">⊕</span>
+                    </button>
+                    <button class="btn btn-secondary">
+                        <span>Exportar</span>
+                        <span class="badge">📥</span>
+                    </button>
+                    <button class="btn btn-primary">
+                        <span>Nuevo gasto</span>
+                        <span class="badge">➕</span>
+                    </button>
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar empleado" />
+                        <button class="search-btn">🔍</button>
+                    </div>
+                    <button class="user-btn">👤</button>
+                </div>
+            </header>
+
+            <!-- Filters -->
+            <div class="filters">
+                <select class="filter-select">
+                    <option>Marzo 2025</option>
+                    <option>Abril 2025</option>
+                    <option>Mayo 2025</option>
+                </select>
+                <select class="filter-select">
+                    <option>Todos los estados</option>
+                    <option>Pagado</option>
+                    <option>Pendiente</option>
+                </select>
+                <select class="filter-select">
+                    <option>Todas las categorías</option>
+                    <option>Ingresos</option>
+                    <option>Gastos</option>
+                </select>
+            </div>
+
+            <!-- Data Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Descripción</th>
+                            <th>Categoría</th>
+                            <th>Monto</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                        <tbody id="tabla-finanzas">
+                        <!-- Los datos se cargan desde JS -->
+                        </tbody>
+                </table>
+            </div>
+
+            <!-- Summary Footer -->
+            <div class="summary-footer">
+                <div class="summary-text">
+                    Total este mes: <strong>$2,300,000</strong> | Mes anterior: <strong>$4,500,000</strong>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../js/finanzas_admin.js"></script>
+</body>
+</html>

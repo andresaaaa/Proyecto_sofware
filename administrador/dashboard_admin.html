@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrativo - Emil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/Styile_Dashboard_AD.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="avatar">E</div>
+            <div class="user-info">
+                <h3>Emil</h3>
+                <p>Administrador</p>
+            </div>
+        </div>
+        <nav>
+            <div class="menu-item active">
+                <span>🏠</span>
+                <span>Dashboard</span>
+            </div>
+
+            <div class="menu-item" id="Finanzas" >  
+                    <span>📈</span>
+                    <span>Finanzas</span>
+            </div>
+            <div class="menu-item" id="Empleados">
+                <span>👥</span>
+                <span>Empleados</span>
+            </div>
+            <div class="menu-item" id="Asistencia">
+                <span>🕐</span>
+                <span>Asistencias</span>
+            </div>
+            <div class="menu-item" id="Nomina">
+                <span>💰</span>
+                <span>Nómina</span>
+            </div>
+            <div class="menu-item" id="Reportes">
+                <span>📊</span>
+                <span>Reportes</span>
+            </div>
+        </nav>
+
+        <div style="position: absolute; bottom: 20px; width: 100%;" id="Extras">
+            <div class="menu-item">
+                <span>⚙️</span>
+                <span>Extras</span>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="dashboard-grid">
+                <!-- Left Column -->
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <!-- Empleados Activos -->
+                    <div class="card stat-card">
+                        <div class="stat-icon icon-yellow">👥</div>
+                        <div class="stat-info">
+                            <h3>Empleados Activos</h3>
+                            <p>20/25</p>
+                        </div>
+                    </div>
+
+                    <!-- Asistencias de Hoy -->
+                    <div class="card stat-card">
+                        <div class="stat-icon icon-yellow">🕐</div>
+                        <div class="stat-info">
+                            <h3>Asistencias de Hoy</h3>
+                            <p style="font-size: 20px;">Hoy</p>
+                        </div>
+                        <div class="stat-percentage">95%</div>
+                    </div>
+
+                    <!-- Horas Extra -->
+                    <div class="card stat-card">
+                        <div class="stat-icon icon-yellow">⚠️</div>
+                        <div class="stat-info">
+                            <h3>Horas Extra</h3>
+                            <p style="font-size: 20px;">4 Hoy</p>
+                        </div>
+                        <div style="margin-left: auto; color: #6b7280; font-size: 14px;">23 oct</div>
+                    </div>
+
+                    <!-- Nóminas Mes -->
+                    <div class="card">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
+                            <div class="stat-icon icon-yellow">📈</div>
+                            <h3 class="section-title" style="margin: 0;">Nóminas Mes</h3>
+                        </div>
+                        <p style="font-size: 24px; font-weight: 700; color: #111827;">$ 7,858,000</p>
+                        <p style="font-size: 18px; color: #6b7280; margin-top: 4px;">$ 6,858,000</p>
+                    </div>
+                </div>
+
+                <!-- Center Column -->
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <!-- Asistencia por departamento -->
+                    <div class="card middle-card">
+                        <h3 class="section-title">Asistencia por departamento</h3>
+                        
+                        <div style="margin-bottom: 12px;">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                            <div style="text-align: right; font-weight: 600; color: #111827;">85%</div>
+                        </div>
+
+                        <div style="margin-bottom: 12px;">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 95%;"></div>
+                            </div>
+                            <div style="text-align: right; font-weight: 600; color: #111827;">95%</div>
+                        </div>
+
+                        <div style="margin-bottom: 12px;">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 95%;"></div>
+                            </div>
+                            <div style="text-align: right; font-weight: 600; color: #111827;">95%</div>
+                        </div>
+
+                        <div class="tab-buttons">
+                            <button class="tab-btn active">Administrador</button>
+                            <button class="tab-btn">Empleados</button>
+                        </div>
+                    </div>
+
+                    <!-- Mes actual Vs mes anterior -->
+                    <div class="card middle-card">
+                        <h3 class="section-title">Mes actual Vs mes anterior</h3>
+                        <canvas id="attendanceChart" height="80"></canvas>
+                    </div>
+
+                    <!-- Alertas -->
+                    <div class="card middle-card">
+                        <h3 class="section-title">Alertas</h3>
+                        
+                        <div class="alert-item">
+                            <div class="alert-icon alert-warning">⚠️</div>
+                            <span>4 empleados con ingreso tardío</span>
+                        </div>
+
+                        <div class="alert-item" style="border: none;">
+                            <div class="alert-icon alert-info">💰</div>
+                            <span>Revisar Nómina</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <!-- Acciones Inmediatas -->
+                    <div class="card last-card">
+                        <h3 class="section-title">ACCIONES INMEDIATAS</h3>
+                        <button class="action-btn primary">✚ Nuevo Empleado</button>
+                        <button class="action-btn">Generar Reporte</button>
+                        <button class="action-btn">Calcular Nómina</button>
+                        <button class="action-btn">Ver Asistencias</button>
+                        <button class="action-btn">Gestionar Usuarios</button>
+                        <button class="action-btn">Gestionar Finanzas</button>
+                    </div>
+
+                    <!-- Pendientes -->
+                    <div class="card last-card">
+                        <h3 class="section-title">PENDIENTES</h3>
+                        <div class="pending-item">
+                            • Aprobar 2 solicitudes de vacaciones
+                        </div>
+                        <div class="pending-item">
+                            • Revisar Empleados que deben trabajar horas extra
+                        </div>
+                        <div class="pending-item">
+                            • Llamar atención al empleado Emil Sanchez por llegada tarde en más de 3 ocasiones
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+<script src="../js/dashboard_admin.js"></script>
+</body>
+</html>

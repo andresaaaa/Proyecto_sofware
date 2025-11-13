@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo Reportes - Sistema de Asistencias</title>
+    <link rel="stylesheet" href="/css/style_reportes.css">
+</head>
+<body>
+    
+       <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="avatar">E</div>
+            <div class="user-info">
+                <h3>Emil</h3>
+                <p>Administrador</p>
+            </div>
+        </div>
+        <nav>
+            <div class="menu-item " id="Dashboard">
+                <span>🏠</span>
+                <span>Dashboard</span>
+            </div>
+
+            <div class="menu-item" id="Finanzas" >  
+                    <span>📈</span>
+                    <span>Finanzas</span>
+            </div>
+            <div class="menu-item " id="Empleados">
+                <span>👥</span>
+                <span>Empleados</span>
+            </div>
+            <div class="menu-item" id="Asistencia">
+                <span>🕐</span>
+                <span>Asistencias</span>
+            </div>
+            <div class="menu-item" id="Nomina">
+                <span>💰</span>
+                <span>Nómina</span>
+            </div>
+            <div class="menu-item active" id="Reportes">
+                <span>📊</span>
+                <span>Reportes</span>
+            </div>
+        </nav>
+
+        <div style="position: absolute; bottom: 20px; width: 100%;" id="Extras">
+            <div class="menu-item">
+                <span>⚙️</span>
+                <span>Extras</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+     <div class="main-content">
+        <div class="content-wrapper">  
+        
+                <div class="header">
+                    <h1 class="header-title">
+                        Gestor Empleados
+                    </h1>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <input type="text" placeholder="Buscar empleado" id="searchInput" onkeyup="buscarEmpleado()">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="user-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="reports-grid">
+                <!-- Report Card 1 - Emil Sanchez -->
+                <div class="report-card" data-employee="Emil Sanchez">
+                    <div class="card-header">
+                        <div class="employee-avatar" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="employee-info">
+                            <h2 class="employee-name">Emil Sanchez</h2>
+                            <p class="employee-id">1065.868.760</p>
+                        </div>
+                    </div>
+
+                    <div class="report-section">
+                        <h3 class="section-title">Asistencia - Ausenseias</h3>
+                        <div class="export-controls">
+                            <button class="date-picker-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                <span>Fecha</span>
+                            </button>
+                            <button class="export-btn small">PDF</button>
+                            <button class="export-btn small">Excel</button>
+                        </div>
+                    </div>
+
+                    <div class="report-section">
+                        <h3 class="section-title">Horas extras</h3>
+                        <div class="export-controls">
+                            <button class="date-picker-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                <span>Fecha</span>
+                            </button>
+                            <button class="export-btn small">PDF</button>
+                            <button class="export-btn small">Excel</button>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <svg class="donut-chart" viewBox="0 0 200 200">
+                            <circle class="donut-segment" cx="100" cy="100" r="80" fill="none" stroke="#0a1647" stroke-width="40"
+                                stroke-dasharray="251.2 251.2" transform="rotate(-90 100 100)"></circle>
+                            <circle class="donut-segment" cx="100" cy="100" r="80" fill="none" stroke="#1890d4" stroke-width="40"
+                                stroke-dasharray="125.6 376.8" stroke-dashoffset="-251.2" transform="rotate(-90 100 100)"></circle>
+                            <circle class="donut-segment" cx="100" cy="100" r="80" fill="none" stroke="#00d4ff" stroke-width="40"
+                                stroke-dasharray="75.36 427.04" stroke-dashoffset="-376.8" transform="rotate(-90 100 100)"></circle>
+                        </svg>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #1890d4;"></span>
+                                <span class="legend-label">Asistencia</span>
+                                <span class="legend-value">50%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #0a1647;"></span>
+                                <span class="legend-label">Ausencia</span>
+                                <span class="legend-value">35%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #00d4ff;"></span>
+                                <span class="legend-label">Horas Extra</span>
+                                <span class="legend-value">15%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions">
+                        <button class="btn btn-primary">Exportar Datos</button>
+                        <button class="btn btn-secondary">PDF</button>
+                        <button class="btn btn-secondary">Excel</button>
+                    </div>
+                </div>
+
+                <!-- Report Card 2 - Fernanda Rodriguez -->
+                <div class="report-card" data-employee="Fernanda Rodriguez">
+                    <div class="card-header">
+                        <div class="employee-avatar" style="background: linear-gradient(135deg, #34495e, #2c3e50);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="employee-info">
+                            <h2 class="employee-name">Fernanda Rodriguez</h2>
+                            <p class="employee-id">1064.857.760</p>
+                        </div>
+                    </div>
+
+                    <div class="report-section">
+                        <h3 class="section-title">Asistencia - Ausenseias</h3>
+                        <div class="export-controls">
+                            <button class="date-picker-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                <span>Fecha</span>
+                            </button>
+                            <button class="export-btn small">PDF</button>
+                            <button class="export-btn small">Excel</button>
+                        </div>
+                    </div>
+
+                    <div class="report-section">
+                        <h3 class="section-title">Horas extras</h3>
+                        <div class="export-controls">
+                            <button class="date-picker-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                <span>Fecha</span>
+                            </button>
+                            <button class="export-btn small">PDF</button>
+                            <button class="export-btn small">Excel</button>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <svg class="donut-chart" viewBox="0 0 200 200">
+                            <circle class="donut-segment" cx="100" cy="100" r="80" fill="none" stroke="#0a1647" stroke-width="40"
+                                stroke-dasharray="251.2 251.2" transform="rotate(-90 100 100)"></circle>
+                            <circle class="donut-segment" cx="100" cy="100" r="80" fill="none" stroke="#1890d4" stroke-width="40"
+                                stroke-dasharray="125.6 376.8" stroke-dashoffset="-251.2" transform="rotate(-90 100 100)"></circle>
+                            <circle class="donut-segment" cx="100" cy="100" r="80" fill="none" stroke="#00d4ff" stroke-width="40"
+                                stroke-dasharray="75.36 427.04" stroke-dashoffset="-376.8" transform="rotate(-90 100 100)"></circle>
+                        </svg>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #1890d4;"></span>
+                                <span class="legend-label">Asistencia</span>
+                                <span class="legend-value">50%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #0a1647;"></span>
+                                <span class="legend-label">Horas Extra</span>
+                                <span class="legend-value">35%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #00d4ff;"></span>
+                                <span class="legend-label">Ausencia</span>
+                                <span class="legend-value">15%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions">
+                        <button class="btn btn-primary">Exportar Datos</button>
+                        <button class="btn btn-secondary">PDF</button>
+                        <button class="btn btn-secondary">Excel</button>
+                    </div>
+                </div>
+
+                <!-- Report Card 3 - Carlos Sanchez -->
+                <div class="report-card" data-employee="Carlos Sanchez">
+                    <div class="card-header">
+                        <div class="employee-avatar" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="employee-info">
+                            <h2 class="employee-name">Carlos Sanchez</h2>
+                            <p class="employee-id">1064.857.760</p>
+                        </div>
+                    </div>
+
+                    <div class="report-section">
+                        <h3 class="section-title">Asistencia - Ausenseias</h3>
+                        <div class="export-controls">
+                            <button class="date-picker-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                <span>Fecha</span>
+                            </button>
+                            <button class="export-btn small">PDF</button>
+                            <button class="export-btn small">Excel</button>
+                        </div>
+                    </div>
+
+                    <div class="report-section">
+                        <h3 class="section-title">Horas extras</h3>
+                        <div class="export-controls">
+                            <button class="date-picker-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                <span>Fecha</span>
+                            </button>
+                            <button class="export-btn small">PDF</button>
+                            <button class="export-btn small">Excel</button>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <svg class="donut-chart" viewBox="0 0 200 200">
+                            <circle class="donut-segment" cx="100" cy="100" r="80" fill="none" stroke="#0a1647" stroke-width="40"
+                                stroke-dasharray="251.2 251.2" transform="rotate(-90 100 100)"></circle>
+                            <circle class="donut-segment" cx="100" cy="100" r="80" fill="none" stroke="#1890d4" stroke-width="40"
+                                stroke-dasharray="125.6 376.8" stroke-dashoffset="-251.2" transform="rotate(-90 100 100)"></circle>
+                            <circle class="donut-segment" cx="100" cy="100" r="80" fill="none" stroke="#00d4ff" stroke-width="40"
+                                stroke-dasharray="75.36 427.04" stroke-dashoffset="-376.8" transform="rotate(-90 100 100)"></circle>
+                        </svg>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #1890d4;"></span>
+                                <span class="legend-label">Asistencia</span>
+                                <span class="legend-value">50%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #0a1647;"></span>
+                                <span class="legend-label">Ausencia</span>
+                                <span class="legend-value">35%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #00d4ff;"></span>
+                                <span class="legend-label">Horas Extra</span>
+                                <span class="legend-value">15%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions">
+                        <button class="btn btn-primary">Exportar Datos</button>
+                        <button class="btn btn-secondary">PDF</button>
+                        <button class="btn btn-secondary">Excel</button>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+
+    <script src="/js/reportes_admin.js"></script>
+</body>
+</html>

@@ -6,510 +6,98 @@
     <title>Gestor Empleados</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .sidebar {
-            background: #0a0e27;
-            width: 240px;
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            color: #8b92b8;
-            overflow-y: auto;
-        }
-
-        .profile-section {
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid #1a1f3a;
-        }
-
-        .profile-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #667eea;
-        }
-
-        .profile-info h3 {
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .profile-info p {
-            font-size: 12px;
-            color: #8b92b8;
-        }
-
-        .menu-toggle {
-            margin-left: auto;
-            color: white;
-            cursor: pointer;
-        }
-
-        .nav-menu {
-            padding: 20px 0;
-        }
-
-        .nav-item {
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: #8b92b8;
-            text-decoration: none;
-        }
-
-        .nav-item:hover {
-            background: #1a1f3a;
-            color: white;
-        }
-
-        .nav-item.active {
-            background: #4a5568;
-            color: white;
-            border-left: 3px solid #667eea;
-        }
-
-        .nav-item i {
-            width: 20px;
-            font-size: 18px;
-        }
-
-        .main-content {
-            margin-left: 240px;
-            padding: 30px;
-        }
-
-        .content-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
-
-        .header-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 28px;
-            font-weight: 700;
-            color: #1a202c;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .btn-add {
-            background: #0a0e27;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-add:hover {
-            background: #1a1f3a;
-            transform: translateY(-2px);
-        }
-
-        .search-box {
-            position: relative;
-        }
-
-        .search-box input {
-            padding: 10px 40px 10px 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 25px;
-            width: 250px;
-            outline: none;
-            transition: all 0.3s;
-        }
-
-        .search-box input:focus {
-            border-color: #667eea;
-        }
-
-        .search-box i {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #a0aec0;
-        }
-
-        .user-icon {
-            width: 35px;
-            height: 35px;
-            background: #667eea;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-        }
-
-        .table-container {
-            background: #0a0e27;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        thead {
-            background: #0a0e27;
-        }
-
-        thead th {
-            padding: 18px;
-            text-align: left;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        tbody {
-            background: white;
-        }
-
-        tbody tr {
-            border-bottom: 1px solid #e2e8f0;
-            transition: all 0.3s;
-        }
-
-        tbody tr:hover {
-            background: #f7fafc;
-        }
-
-        tbody td {
-            padding: 18px;
-            color: #2d3748;
-        }
-
-        .employee-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-        }
-
-        .avatar-purple { background: #9f7aea; }
-        .avatar-gray { background: #718096; }
-        .avatar-yellow { background: #ecc94b; }
-        .avatar-pink { background: #ed64a6; }
-
-        .employee-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .status-indicator {
-            width: 10px;
-            height: 10px;
-            background: #48bb78;
-            border-radius: 50%;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-action {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 12px;
-            transition: all 0.3s;
-        }
-
-        .btn-view {
-            background: #e2e8f0;
-            color: #4a5568;
-        }
-
-        .btn-view:hover {
-            background: #cbd5e0;
-        }
-
-        .btn-edit {
-            background: #e2e8f0;
-            color: #4a5568;
-        }
-
-        .btn-edit:hover {
-            background: #cbd5e0;
-        }
-
-        .btn-delete {
-            background: #fc8181;
-            color: white;
-        }
-
-        .btn-delete:hover {
-            background: #f56565;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s;
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
-            .header {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .search-box input {
-                width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/style_empleados.css">
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="profile-section">
-            <img src="https://ui-avatars.com/api/?name=Karolay&background=667eea&color=fff" alt="Profile" class="profile-avatar">
-            <div class="profile-info">
-                <h3>Karolay</h3>
+     <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="avatar">E</div>
+            <div class="user-info">
+                <h3>Emil</h3>
                 <p>Administrador</p>
             </div>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
         </div>
-
-        <nav class="nav-menu">
-            <a href="#" class="nav-item">
-                <i class="fas fa-home"></i>
+        <nav>
+            <div class="menu-item " id="Dashboard">
+                <span>🏠</span>
                 <span>Dashboard</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-chart-line"></i>
-                <span>Finanzas</span>
-            </a>
-            <a href="#" class="nav-item active">
-                <i class="fas fa-users"></i>
+            </div>
+
+            <div class="menu-item" id="Finanzas" >  
+                    <span>📈</span>
+                    <span>Finanzas</span>
+            </div>
+            <div class="menu-item active" id="Empleados">
+                <span>👥</span>
                 <span>Empleados</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-clock"></i>
+            </div>
+            <div class="menu-item" id="Asistencia">
+                <span>🕐</span>
                 <span>Asistencias</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="menu-item" id="Nomina">
+                <span>💰</span>
                 <span>Nómina</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="menu-item" id="Reportes">
+                <span>📊</span>
                 <span>Reportes</span>
-            </a>
+            </div>
         </nav>
 
-        <div style="position: absolute; bottom: 20px; width: 100%;">
-            <a href="#" class="nav-item">
-                <i class="fas fa-cog"></i>
+        <div style="position: absolute; bottom: 20px; width: 100%;" id="Extras">
+            <div class="menu-item">
+                <span>⚙️</span>
                 <span>Extras</span>
-            </a>
+            </div>
         </div>
-    </div>
+    </aside>
 
     <!-- Main Content -->
     <div class="main-content">
-        <div class="content-card">
-            <div class="header">
-                <h1 class="header-title">
-                    <i class="fas fa-list"></i>
-                    Gestor Empleados
-                </h1>
-                <div class="header-actions">
-                    <button class="btn-add" onclick="agregarEmpleado()">
-                        <i class="fas fa-plus"></i>
-                        Agregar
-                    </button>
-                    <div class="search-box">
-                        <input type="text" placeholder="Buscar empleado" id="searchInput" onkeyup="buscarEmpleado()">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="user-icon">
-                        <i class="fas fa-user"></i>
+        <div class="content-wrapper">
+                <div class="header">
+                    <h1 class="header-title">
+                        Gestor Empleados
+                    </h1>
+                    <div class="header-actions">
+                        <button class="btn-add" onclick="agregarEmpleado()">
+                            <i class="fas fa-plus"></i>
+                            Agregar
+                        </button>
+                        <div class="search-box">
+                            <input type="text" placeholder="Buscar empleado" id="searchInput" onkeyup="buscarEmpleado()">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="user-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="table-container">
-                <table id="employeeTable">
-                    <thead>
-                        <tr>
-                            <th>Nombre y Apellido</th>
-                            <th>Cedula</th>
-                            <th>Departamento</th>
-                            <th>Salario B.</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="employeeTableBody">
-                        <!-- Employees will be loaded here by JavaScript -->
-                    </tbody>
-                </table>
-            </div>
+                <div class="table-container">
+                    <table id="employeeTable">
+                        <thead>
+                            <tr>
+                                <th>Nombre y Apellido</th>
+                                <th>Cédula</th>
+                                <th>Departamento</th>
+                                <th>Salario B.</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                            <!-- Se cargan los empleados desde JS -->
+                        </tbody>
+                    </table>
+                </div>
+            
         </div>
     </div>
 
-    <script>
-        // Sample employee data
-        const employees = [
-            { name: 'Emil Sanchez', cedula: '1.064.868.724', departamento: 'Administrador', salario: '2,428,990', avatar: 'purple' },
-            { name: 'Fernanda Rodriguez', cedula: '1.064.868.724', departamento: 'Ventas', salario: '1,428,990', avatar: 'gray' },
-            { name: 'Carlos Sanchez', cedula: '1.064.868.724', departamento: 'Ventas', salario: '1,428,990', avatar: 'purple' },
-            { name: 'Emil Sanchez', cedula: '1.064.868.724', departamento: 'Ventas', salario: '2,428,990', avatar: 'gray' },
-            { name: 'Fernanda Rodriguez', cedula: '1.064.868.724', departamento: 'Ventas', salario: '1,428,990', avatar: 'purple' },
-            { name: 'Carlos Sanchez', cedula: '1.064.868.724', departamento: 'Ventas', salario: '1,428,990', avatar: 'yellow' },
-            { name: 'Emil Sanchez', cedula: '1.064.868.724', departamento: 'Ventas', salario: '2,428,990', avatar: 'purple' },
-            { name: 'Fernanda Rodriguez', cedula: '1.064.868.724', departamento: 'Ventas', salario: '1,428,990', avatar: 'pink' },
-            { name: 'Carlos Sanchez', cedula: '1.064.868.724', departamento: 'Ventas', salario: '1,428,990', avatar: 'purple' }
-        ];
+    <script src="../js/empleados_admin.js"></script>
 
-        // Load employees into table
-        function loadEmployees() {
-            const tbody = document.getElementById('employeeTableBody');
-            tbody.innerHTML = '';
-
-            employees.forEach((emp, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>
-                        <div class="employee-info">
-                            <div class="employee-avatar avatar-${emp.avatar}">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <span>${emp.name}</span>
-                        </div>
-                    </td>
-                    <td>${emp.cedula}</td>
-                    <td>${emp.departamento}</td>
-                    <td>${emp.salario}</td>
-                    <td>
-                        <div class="status-indicator"></div>
-                    </td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="btn-action btn-view" onclick="verEmpleado(${index})">
-                                <i class="fas fa-cog"></i> Ver
-                            </button>
-                            <button class="btn-action btn-edit" onclick="editarEmpleado(${index})">
-                                <i class="fas fa-edit"></i> Editar
-                            </button>
-                            <button class="btn-action btn-delete" onclick="eliminarEmpleado(${index})">
-                                <i class="fas fa-trash"></i> Eliminar
-                            </button>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        // Search functionality
-        function buscarEmpleado() {
-            const input = document.getElementById('searchInput');
-            const filter = input.value.toLowerCase();
-            const table = document.getElementById('employeeTable');
-            const rows = table.getElementsByTagName('tr');
-
-            for (let i = 1; i < rows.length; i++) {
-                const nameCell = rows[i].getElementsByTagName('td')[0];
-                if (nameCell) {
-                    const textValue = nameCell.textContent || nameCell.innerText;
-                    if (textValue.toLowerCase().indexOf(filter) > -1) {
-                        rows[i].style.display = '';
-                    } else {
-                        rows[i].style.display = 'none';
-                    }
-                }
-            }
-        }
-
-        // Action functions
-        function agregarEmpleado() {
-            alert('Función: Agregar nuevo empleado');
-        }
-
-        function verEmpleado(index) {
-            alert(`Ver detalles de: ${employees[index].name}`);
-        }
-
-        function editarEmpleado(index) {
-            alert(`Editar empleado: ${employees[index].name}`);
-        }
-
-        function eliminarEmpleado(index) {
-            if (confirm(`¿Está seguro de eliminar a ${employees[index].name}?`)) {
-                employees.splice(index, 1);
-                loadEmployees();
-            }
-        }
-
-        // Initialize
-        loadEmployees();
-    </script>
 </body>
 </html>
