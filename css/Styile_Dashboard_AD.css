@@ -73,24 +73,25 @@ body {
 }
 
 
-
 .main-content {
     margin-left: 240px;
-    max-height: 80vh;
-    margin-bottom: 100px;
+    height: 100%;
+   
 }
 
 .content-wrapper {
   background: #4a5c7c;
-  padding: 30px;
   min-height: 100%;
+
 }
+
 .dashboard-grid {
     display: grid;
     grid-template-columns: 380px 1fr 280px;
     gap: 24px;
-    padding: 20px;
-    
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .card {
@@ -104,17 +105,17 @@ body {
     display: flex;
     align-items: center;
     gap: 16px;
-    min-height: 230px;
+    height: 100%;
 }
 
 .middle-card {
     gap: 16px;
-    max-height: 360px;
+    height: 100%;
 }
 
 .last-card {
     gap: 16px;
-    min-height: 460px;
+    height: 100%;
 }
 
 .stat-icon {

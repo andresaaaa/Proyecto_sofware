@@ -76,13 +76,14 @@ body {
 .main-content {
     margin-left: 240px;
     padding: 30px;
+
 }
 
 .content-wrapper {
   background: #6b7fa3;
   border-radius: 20px;
   padding: 30px;
-  min-height: 100%;
+  min-height: 45%;
 }
 
 

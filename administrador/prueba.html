@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TigreTeVe - Plataforma de Mensajería</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+    .search-icon {
+      width: 24px;
+      height: 24px;
+    }
+    .online-indicator {
+      width: 20px;
+      height: 20px;
+      background: #22c55e;
+      border: 3px solid white;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+    }
+    .campaign-card {
+      background: linear-gradient(135deg, #e8dbb5 0%, #d4c5a0 100%);
+      transition: transform 0.2s;
+    }
+    .campaign-card:hover {
+      transform: translateX(4px);
+    }
+    .promo-card {
+      background: linear-gradient(135deg, #f3e9c8 0%, #e8dbb5 100%);
+    }
+    .promo-image {
+      position: relative;
+      background: linear-gradient(45deg, #d4a574 0%, #f0d9a8 100%);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 h-screen overflow-hidden">
+  
+  <!-- Main Container -->
+  <div class="flex h-screen max-w-7xl mx-auto p-2 gap-4">
+    
+    <!-- Left Sidebar -->
+    <div class="w-32 bg-gray-600 rounded-3xl flex flex-col items-center py-8 shadow-xl">
+      <!-- Profile Picture -->
+      <div class="relative mb-8">
+        <img src="/placeholder.svg?height=80&width=80" 
+             alt="Profile" 
+             class="w-20 h-20 rounded-2xl object-cover shadow-lg">
+        <div class="online-indicator"></div>
+      </div>
+      
+      <!-- Navigation Icons -->
+      <div class="flex flex-col items-center gap-6 flex-1">
+        <!-- Messages Icon -->
+        <button class="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center hover:bg-yellow-500 transition-colors shadow-md">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+          </svg>
+        </button>
+        
+        <!-- Settings Icon -->
+        <button class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center hover:bg-gray-600 transition-colors">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+        </button>
+        
+        <!-- Add Icon -->
+        <button class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center hover:bg-gray-600 transition-colors">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Logout Icon -->
+      <button class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center hover:bg-red-600 transition-colors mt-auto">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Middle Panel - Campaigns -->
+    <div class="flex-1 bg-gray-500 rounded-3xl p-6 shadow-xl overflow-y-auto">
+      <!-- Search Bar -->
+      <div class="mb-6">
+        <div class="relative">
+          <input type="text" 
+                 placeholder="Buscar" 
+                 class="w-full bg-gray-400 text-white placeholder-gray-200 rounded-full py-4 px-6 pl-14 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+          <svg class="absolute left-5 top-1/2 transform -translate-y-1/2 w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Campaigns Title -->
+      <h2 class="text-white text-2xl font-semibold italic mb-6">Campañas</h2>
+      
+      <!-- Campaign List -->
+      <div class="space-y-4">
+        <!-- Campaign 1 -->
+        <div class="campaign-card rounded-3xl p-4 cursor-pointer">
+          <div class="flex items-center gap-4">
+            <img src="/placeholder.svg?height=50&width=50" 
+                 alt="Andrew Parker" 
+                 class="w-12 h-12 rounded-full object-cover">
+            <div class="flex-1">
+              <div class="flex justify-between items-start mb-1">
+                <h3 class="font-semibold text-gray-800">Andrew Parker</h3>
+                <span class="text-xs text-gray-600">11/16/19</span>
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600">
+                <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>What kind of strategy is better?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Campaign 2 -->
+        <div class="campaign-card rounded-3xl p-4 cursor-pointer">
+          <div class="flex items-center gap-4">
+            <img src="/placeholder.svg?height=50&width=50" 
+                 alt="Karen Castillo" 
+                 class="w-12 h-12 rounded-full object-cover">
+            <div class="flex-1">
+              <div class="flex justify-between items-start mb-1">
+                <h3 class="font-semibold text-gray-800">Karen Castillo</h3>
+                <span class="text-xs text-gray-600">11/16/19</span>
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600">
+                <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>What kind of strategy is better?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Campaign 3 -->
+        <div class="campaign-card rounded-3xl p-4 cursor-pointer">
+          <div class="flex items-center gap-4">
+            <img src="/placeholder.svg?height=50&width=50" 
+                 alt="Maximillian Jacobson" 
+                 class="w-12 h-12 rounded-full object-cover">
+            <div class="flex-1">
+              <div class="flex justify-between items-start mb-1">
+                <h3 class="font-semibold text-gray-800">Maximillian Jacobson</h3>
+                <span class="text-xs text-gray-600">11/16/19</span>
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600">
+                <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>What kind of strategy is better?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Panel - Chat -->
+    <div class="flex-1 bg-gray-500 rounded-3xl flex flex-col shadow-xl">
+      <!-- Chat Header -->
+      <div class="promo-card rounded-t-3xl p-4 flex items-center gap-3">
+        <img src="/placeholder.svg?height=50&width=50" 
+             alt="Martha Craig" 
+             class="w-12 h-12 rounded-full object-cover">
+        <h3 class="font-semibold text-gray-800 text-lg">Martha Craig</h3>
+      </div>
+      
+      <!-- Chat Content -->
+      <div class="flex-1 p-6 overflow-y-auto">
+        <!-- Promotional Card -->
+        <div class="promo-card rounded-3xl p-6 shadow-lg">
+          <!-- Promo Image -->
+          <div class="promo-image mb-4 h-48 flex items-center justify-center relative overflow-hidden">
+            <img src="/placeholder.svg?height=200&width=400" 
+                 alt="Promotional" 
+                 class="w-full h-full object-cover absolute">
+            <div class="absolute inset-0 bg-gradient-to-r from-orange-600/60 to-yellow-500/60 flex items-center justify-center">
+              <h2 class="text-white text-2xl font-bold text-center uppercase tracking-wider">
+                CONECTA CON TODA LA REGIÓN
+              </h2>
+            </div>
+          </div>
+          
+          <!-- Promo Text -->
+          <div class="mb-4">
+            <p class="text-gray-800 text-sm mb-2">
+              <span class="font-semibold">👋 ¡Hola martha!</span><br>
+              En TigreTeVe ayudamos a que tu marca conecte con toda la región.<br>
+              ¿Te gustaría conocer nuestros paquetes publicitarios?
+            </p>
+          </div>
+          
+          <!-- Call to Action -->
+          <a href="#" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+            Únete a nuestras redes
+          </a>
+        </div>
+      </div>
+      
+      <!-- Message Input -->
+      <div class="p-6 flex items-center gap-3">
+        <!-- Attachment Button -->
+        <button class="text-white hover:text-yellow-400 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
+          </svg>
+        </button>
+        
+        <!-- Input Field -->
+        <input type="text" 
+               placeholder="Escribe un mensaje..." 
+               class="flex-1 bg-gray-400 text-white placeholder-gray-300 rounded-full py-3 px-6 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+        
+        <!-- Send Button -->
+        <button class="text-white hover:text-yellow-400 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+  </div>
+
+</body>
+</html>
